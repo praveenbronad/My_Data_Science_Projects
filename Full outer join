@@ -1,0 +1,57 @@
+--Full Outer Joins
+SELECT * FROM customer
+FULL OUTER JOIN payment 
+ON customer.customer_id=payment.customer_id
+WHERE customer.customer_id is null 
+OR payment.payment_id is null;
+--- LEFT OUTER JOIN Example
+-- Table 1: film Table 2 : inventory 
+--common column - film id
+SELECT film.film_id, title,inventory_id, store_id
+FROM film
+LEFT OUTER JOIN inventory
+ON film.film_id=inventory.film_id
+WHERE inventory.film_id IS null;
+--- RIGHT OUTER JOIN
+-- just flip the tables
+SELECT inventory.film_id, title,inventory_id, store_id
+FROM inventory
+LEFT OUTER JOIN film
+ON film.film_id=inventory.film_id
+WHERE inventory.film_id IS null;
+---
+-- challenge  common column is address id 
+--table A: address table B: customer
+SELECT district,address.address_id, email FROM address
+FULL OUTER JOIN customer 
+ON address.address_id=customer.address_id
+WHERE district = 'California';
+-- udemy Solution
+SELECT district,address.address_id, email FROM address
+INNER JOIN customer 
+ON address.address_id=customer.address_id
+WHERE district = 'California';
+-- Challenge 
+
+SELECT * FROM actor
+INNER JOIN film_actor
+ON actor.actor_id=film_actor.actor_id
+WHERE first_name = 'Nick' AND last_name='Wahlberg';
+--
+SELECT actor_id,title FROM film_actor
+INNER JOIN film
+ON film_actor.film_id=film.film_id
+WHERE actor_id=2; 
+---
+--udemy solution
+SELECT title,first_name,last_name
+FROM film_actor
+INNER JOIN actor
+ON film_actor.actor_id=actor.actor_id
+INNER JOIN film
+ON film_actor.film_id= film.film_id
+WHERE first_name='Nick' AND last_name='Wahlberg';
+----
+
+
+
